@@ -7,16 +7,5 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Jun 2025 17:36:26 +0200</lastBuildDate><atom:link href="https://microgeni.se/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My first post</title>
-      <link>https://microgeni.se/posts/mypost/</link>
-      <pubDate>Sun, 22 Jun 2025 17:36:26 +0200</pubDate>
-      
-      <guid>https://microgeni.se/posts/mypost/</guid>
-      
-      <description>&lt;p&gt;Cool my first simple post&lt;/p&gt;</description>
-      
-    </item>
-    
   </channel>
 </rss>
