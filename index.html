@@ -1,53 +1,664 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Microgeni - Welcome to our website">
-    <title>Microgeni</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <title>Microgeni · Digital- och IT-konsult</title>
+  <link rel="icon" type="image/png" href="favico.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Microgeni erbjuder konsulttjänster inom Linux/Unix, systemadministration, DevOps, automation, embedded-utveckling och PCB-design." />
+  <style>
+    :root {
+      --bg: #0f1412;
+      --bg-soft: rgba(15, 20, 18, 0.75);
+      --text: #ffffff;
+      --accent: #39c172; /* Microgeni grön */
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page { min-height: 100vh; background: var(--bg); }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0));
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 32px; width: auto; cursor: pointer; }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a { opacity: 0.8; }
+    .nav-links a:hover { opacity: 1; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8vw;
+      color: #ffffff;
+    }
+
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+    .hero-video { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.40),
+      rgba(0,0,0,0.40)
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(57, 193, 114, 0.12),
+      rgba(0,0,0,0.55) 60%
+    );
+  z-index: 1;
+}
+
+
+    .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+
+    .hero-kicker {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-weight: 800;
+      font-size: clamp(34px, 6.6vw, 82px);
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+    .hero-title span { display: block; }
+
+    .hero-sub {
+      max-width: 640px;
+      margin-top: 22px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.90);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      padding: 10px 22px;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #061008;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover {
+      background: #63d592;
+      border-color: #63d592;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.55);
+      transform: translateY(-2px);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      opacity: 0.86;
+      margin-top: 18px;
+    }
+
+    .hero-tags span {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 4px 10px;
+      background: rgba(0,0,0,0.12);
+    }
+
+    /* SECTIONS */
+    section { padding: 96px 8vw; }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-weight: 800;
+      font-size: clamp(26px, 4vw, 40px);
+      margin-bottom: 16px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .copy-muted {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 15px;
+      max-width: 720px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pill-row span {
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0,0,0,0.10);
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .service-card {
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-card h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .service-tagline {
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* PROCESS */
+    .process-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 40px;
+      margin-top: 24px;
+      align-items: center;
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .process-step {
+      padding-left: 18px;
+      border-left: 2px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .process-step h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    /* CONTACT / FOOTER */
+    .contact { padding-top: 56px; padding-bottom: 72px; background: var(--bg); }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .contact-main { max-width: 720px; }
+
+    .contact-main p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.86);
+      margin-top: 8px;
+      margin-bottom: 18px;
+    }
+
+    .contact-details { font-size: 13px; color: rgba(255, 255, 255, 0.80); }
+
+    .contact-details a {
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.38);
+    }
+
+    .contact-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 8px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.78);
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .contact-badge:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.30);
+      color: #fff;
+    }
+
+    .contact-badge-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .hex-graphic-wrap {
+      max-width: 260px;
+      justify-self: start;
+      text-align: left;
+      display: block;
+      opacity: 0.95;
+    }
+
+    .footer {
+      padding: 18px 8vw 28px 8vw;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.55);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* SECTION BACKGROUNDS */
+    #about { background: rgba(255,255,255,0.03); }
+    #competens { background: var(--bg); }
+    #process { background: rgba(255,255,255,0.03); }
+    #contact { background: var(--bg); }
+
+    /* REVEAL ANIMATION ONLY FOR HERO TITLE */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 960px) {
+      .nav { padding: 12px 18px; }
+      .nav-links { display: none; }
+      section { padding: 72px 18px; }
+
+      .section-grid,
+      .process-layout,
+      .contact-inner { grid-template-columns: 1fr; }
+
+      .hero {
+        padding: 190px 18px 56px;
+        height: auto;
+        min-height: 70vh;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .hero-title { font-size: clamp(36px, 10vw, 54px); }
+      .hex-graphic-wrap { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html">Microgeni</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<div id="top"></div>
+<div class="page">
 
-    <main>
-        <section class="hero">
-            <h1>Welcome to Microgeni</h1>
-            <p>Your tagline or brief description goes here</p>
-        </section>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-logo">
+      <a href="#top" aria-label="Till toppen">
+        <img src="Logo.png" alt="Microgeni logotyp" />
+      </a>
+    </div>
+    <nav class="nav-links" aria-label="Huvudmeny">
+      <a href="#competens">Kompetens</a>
+      <a href="#process">Arbetssätt</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
 
-        <section id="about" class="section">
-            <h2>About</h2>
-            <p>Tell visitors about your project or company.</p>
-        </section>
+  <!-- HERO -->
+  <section class="hero" aria-label="Microgeni">
+    <div class="hero-bg" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline poster="hero.jpg">
+        <source src="microgeni-hero.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
 
-        <section id="services" class="section">
-            <h2>Services</h2>
-            <p>Describe what you offer.</p>
-        </section>
+    <div class="hero-content">
+      <div class="hero-kicker">Microgeni · Digital- och IT-konsult</div>
+      <h1 class="hero-title">
+        <span>ROBUST DRIFT,</span>
+        <span>AUTOMATION,</span>
+        <span>LEVERANS</span>
+      </h1>
 
-        <section id="contact" class="section">
-            <h2>Contact</h2>
-            <p>Get in touch with us.</p>
-        </section>
-    </main>
+      <p class="hero-sub">
+        Microgeni erbjuder konsulttjänster inom systemadministration, DevOps och automation med stark förankring i Linux och Unix.
+        Vi hjälper företag att bygga robusta, skalbara infrastrukturer och effektivisera utvecklingsflöden.
+      </p>
 
-    <footer>
-        <p>&copy; 2025 Microgeni. All rights reserved.</p>
-    </footer>
+      <div class="hero-cta-row">
+        <a href="#competens" class="btn">Se kompetens</a>
+        <a href="#contact" class="btn btn-secondary">Boka samtal</a>
+      </div>
 
-    <script src="js/main.js"></script>
+      <div class="hero-tags" aria-label="Nyckelområden">
+        <span>Linux/Unix</span>
+        <span>DevOps</span>
+        <span>CI/CD</span>
+        <span>Infrastructure as Code</span>
+        <span>Embedded</span>
+        <span>PCB</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-grid">
+      <div>
+        <div class="section-label">Om Microgeni</div>
+        <h2 class="section-title">Konsulttjänster som gör drift och leverans enklare</h2>
+        <p class="copy-muted">
+          På Microgeni arbetar vi i skärningspunkten mellan stabil drift och snabb utveckling. Fokus ligger på att få system att tåla
+          produktion, minska manuellt arbete och skapa förutsägbara leveranser.
+        </p>
+        <p class="copy-muted" style="margin-top: 12px;">
+          Oavsett om du behöver stärka en befintlig plattform, bygga ett nytt flöde för release och deployment, eller ta en
+          embedded-produkt från krav till prototyp tillsammans med oss, så är målet detsamma, en lösning som är robust, begriplig och möjlig att
+          förvalta.
+        </p>
+
+        <div class="pill-row" aria-label="Arbetsprinciper">
+          <span>Produktion först</span>
+          <span>Automatisera där det ger effekt</span>
+          <span>Observerbarhet och felsökbarhet</span>
+          <span>Enkelhet i arkitektur</span>
+          <span>Säkerhet som standard</span>
+        </div>
+      </div>
+
+      <div>
+        <img src="graphic_progress.png" alt="Illustration" style="width:100%; height:auto; opacity:0.95;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- KOMPETENS -->
+  <section id="competens">
+    <div class="section-label">Kompetensområden</div>
+    <h2 class="section-title">Teknisk spets med fokus på drift, automation och hårdvara</h2>
+    <p class="copy-muted">
+      Vi anpassar uppdraget efter miljö och målbild, från hands-on felsökning och förbättringar i produktion till design och
+      implementation av pipelines och plattformar.
+    </p>
+
+    <div class="card-row" style="margin-top: 28px;">
+      <article class="service-card">
+        <h3>Linux/Unix</h3>
+        <p>
+          Djup kunskap om systemarkitektur, kernel-nivå felsökning, nätverkskonfiguration och prestandaoptimering.
+          Erfarenhet från produktionsmiljöer med höga krav på tillgänglighet och säkerhet.
+        </p>
+        <div class="service-tagline">Drift · Prestanda · Säkerhet · Incident</div>
+      </article>
+
+      <article class="service-card">
+        <h3>DevOps &amp; automation</h3>
+        <p>
+          Design och implementation av CI/CD-pipelines, infrastruktur som kod och automatiserade driftsprocesser.
+          Målet är att minska manuellt arbete och öka tillförlitligheten.
+        </p>
+        <div class="service-tagline">CI/CD · IaC · Release · Observability</div>
+      </article>
+
+      <article class="service-card">
+        <h3>Utveckling</h3>
+        <p>
+          Ansible, Bash, Python och Puppet för konfigurationshantering och automation. C och Erlang för systemprogrammering
+          och distribuerade system. Swift för Apple-plattformar.
+        </p>
+        <div class="service-tagline">Ansible · Bash · Python · C · Erlang · Swift</div>
+      </article>
+
+      <article class="service-card">
+        <h3>Embedded-utveckling</h3>
+        <p>
+          Både hårdvara och mjukvara, från kravspecifikation till färdig produkt, inklusive firmware, drivrutiner och integration
+          mot sensorer och kommunikationsgränssnitt.
+        </p>
+        <div class="service-tagline">Firmware · Drivrutiner · Sensorer · Interfaces</div>
+      </article>
+
+      <article class="service-card">
+        <h3>PCB-design</h3>
+        <p>
+          Schemaritning och layoutdesign för prototyper och mindre produktionsserier. Erfarenhet av att ta projekt från idé till
+          färdigt kretskort.
+        </p>
+        <div class="service-tagline">Schema · Layout · Prototyp · DFM</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-label">Arbetssätt</div>
+    <h2 class="section-title">Strukturerat, transparent och mätbart</h2>
+
+    <div class="process-layout">
+      <div class="process-steps">
+        <div class="process-step">
+          <h3>1 · Nuläge och mål</h3>
+          <p>
+            Vi kartlägger nuvarande miljö, flaskhalsar och risker. Därefter sätter vi ett tydligt mål och en praktisk plan.
+          </p>
+        </div>
+        <div class="process-step">
+          <h3>2 · Åtgärder och automation</h3>
+          <p>
+            Vi implementerar förbättringar stegvis. Fokus på standardisering, versionshantering, testbarhet och automation.
+          </p>
+        </div>
+        <div class="process-step">
+          <h3>3 · Överlämning och förvaltning</h3>
+          <p>
+            Dokumentation, runbooks och kunskapsöverföring. Du får en lösning som är lättare att drifta och vidareutveckla.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <img src="graphic_timeline.png" alt="Illustration" style="width:100%; height:auto; opacity:0.95;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="contact-inner">
+      <div class="contact-main">
+        <div class="section-label">Kontakt</div>
+        <h2 class="section-title">Vill du stärka drift, automation eller embedded?</h2>
+        <p>
+          Beskriv kort vad du vill uppnå, så återkommer vi med ett förslag på upplägg, tid och nästa steg.
+        </p>
+        <p style="margin-top: 10px;">
+          Microgeni levererar både som enskild konsult och kan skala upp via partnernätverk när uppdraget kräver det.
+        </p>
+
+        <div class="contact-badge">
+          <span class="contact-badge-dot" aria-hidden="true"></span>
+          <a href="mailto:info@microgeni.se" style="color:inherit;text-decoration:none;">info@microgeni.se</a>
+        </div>
+
+        <div class="contact-details">
+          <p>
+            Baserad i Sverige, arbetar på distans eller på plats vid behov.
+          </p>
+        </div>
+      </div>
+
+      <div class="hex-graphic-wrap">
+        <img src="graphic_hexagon.png" alt="Grafik" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>&copy; Microgeni, <span id="year"></span></span>
+    <span>Digital- och IT-konsult</span>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const revealEls = document.querySelectorAll('.hero-title');
+
+    revealEls.forEach((el, index) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (index * 140) + 'ms';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    revealEls.forEach(el => observer.observe(el));
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Smooth scroll
+  const links = document.querySelectorAll('a[href^="#"]');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const start = window.pageYOffset;
+        const end = target.getBoundingClientRect().top + window.pageYOffset;
+        const duration = 600;
+        const ease = t => t < .5 ? 2*t*t : -1 + (4 - 2*t)*t;
+        let startTime = null;
+
+        function animateScroll(time) {
+          if (!startTime) startTime = time;
+          const progress = time - startTime;
+          const percent = Math.min(progress / duration, 1);
+          const eased = ease(percent);
+          window.scrollTo(0, start + (end - start) * eased);
+          if (progress < duration) requestAnimationFrame(animateScroll);
+        }
+        requestAnimationFrame(animateScroll);
+      }
+    });
+  });
+</script>
 </body>
 </html>
