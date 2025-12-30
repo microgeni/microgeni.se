@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/daniel/Code/www/microgeni.se status)",
+      "Bash(git -C /Users/daniel/Code/www/microgeni.se diff)",
+      "Bash(git -C /Users/daniel/Code/www/microgeni.se log --oneline -5)"
+    ]
+  }
+}
